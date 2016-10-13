@@ -2,7 +2,7 @@ package response
 
 import (
 	"fmt"
-	"github.com/z-ray/log"
+	"log"
 	"strings"
 )
 
@@ -60,7 +60,7 @@ func (r *BaseResponse) GetCode() string {
 		return fmt.Sprintf("%0.f", integer)
 	}
 	// both not
-	log.Warnf("alipay response code type:%s", r.Code)
+	log.Printf("alipay response code type:%s", r.Code)
 	return ""
 }
 
@@ -85,7 +85,7 @@ type AlipayMobilePublicMessageCustomSendResponse struct {
 type AlipaySystemOauthTokenResponse struct {
 	BaseResponse
 	AccessToken  string `json:"access_token"`
-	AlipayUserId string `json:"alipay_user_id"`
+	AlipayUserId string `json:"user_id"`
 	ExpiresIn    int64  `json:"expires_in"`
 	ReExpiresIn  int64  `json:"re_expires_in"`
 	RefreshToken string `json:"refresh_token"`

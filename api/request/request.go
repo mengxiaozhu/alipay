@@ -1,7 +1,7 @@
 package request
 
 import (
-	"github.com/z-ray/alipay/api/response"
+	"github.com/cocotyty/alipay/api/response"
 )
 
 // AlipayRequest request接口

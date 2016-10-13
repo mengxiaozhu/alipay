@@ -1,8 +1,8 @@
 package request
 
 import (
-	"github.com/z-ray/alipay/api/response"
-	"github.com/z-ray/alipay/api/utils"
+	"github.com/cocotyty/alipay/api/response"
+	"github.com/cocotyty/alipay/api/utils"
 )
 
 // AlipayPassSyncUpdateRequest

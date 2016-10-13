@@ -3,17 +3,18 @@ package alipay
 import (
 	"encoding/json"
 	"github.com/huandu/xstrings"
-	"github.com/z-ray/alipay/api/constants"
-	"github.com/z-ray/alipay/api/logger"
-	"github.com/z-ray/alipay/api/request"
-	"github.com/z-ray/alipay/api/response"
-	"github.com/z-ray/alipay/api/sign"
-	"github.com/z-ray/alipay/api/utils"
-	"github.com/z-ray/log"
+	"github.com/cocotyty/alipay/api/constants"
+	"github.com/cocotyty/alipay/api/logger"
+	"github.com/cocotyty/alipay/api/request"
+	"github.com/cocotyty/alipay/api/response"
+	"github.com/cocotyty/alipay/api/sign"
+	"github.com/cocotyty/alipay/api/utils"
 	"io/ioutil"
 	"net/http"
 	"strings"
 	"time"
+	"fmt"
+	"log"
 )
 
 // default
@@ -57,7 +58,7 @@ func (d *DefaultAlipayClient) ExecuteWithToken(r request.AlipayRequest, token st
 		return nil, err
 	}
 
-	log.Debugf("alipay return : %s", msg)
+	log.Printf("alipay return : %s", msg)
 
 	// body
 	resp := r.GetResponse()
@@ -80,7 +81,7 @@ func (d *DefaultAlipayClient) ExecuteWithToken(r request.AlipayRequest, token st
 	}
 	err = json.Unmarshal([]byte(msg), t)
 	if err != nil {
-		log.Error(err)
+		log.Println(err)
 	}
 
 	// 当发生安全机制接入错误时
@@ -122,7 +123,7 @@ func (d *DefaultAlipayClient) post(r request.AlipayRequest, token string) (strin
 		}
 		result, err = http.Post(d.ServerURL, "application/x-www-form-urlencoded;charset=utf-8", strings.NewReader(values.Encode()))
 		if err != nil {
-			log.Errorf("connect AlipayGateway fail: %s, retry ...", err)
+			log.Printf("connect AlipayGateway fail: %s, retry ...", err)
 			retryCount += 1
 			// 务必休眠一段时间，否则下次可能还会失败
 			time.Sleep(time.Duration(retryCount*3) * time.Second)
@@ -133,7 +134,7 @@ func (d *DefaultAlipayClient) post(r request.AlipayRequest, token string) (strin
 
 	msg, err := ioutil.ReadAll(result.Body)
 	if err != nil {
-		log.Error(err)
+		log.Println(err)
 		return "", rp, err
 	}
 	return string(msg), rp, err

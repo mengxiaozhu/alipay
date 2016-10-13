@@ -3,9 +3,9 @@ package alipass
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/z-ray/alipay"
-	"github.com/z-ray/alipay/api/request"
-	"github.com/z-ray/alipay/api/response"
+	"github.com/cocotyty/alipay"
+	"github.com/cocotyty/alipay/api/request"
+	"github.com/cocotyty/alipay/api/response"
 )
 
 // AlipassTransferService 卡券服务类
@@ -62,7 +62,7 @@ func (a *AlipassTransferService) UpdateTplAlipass(r *UpdTplAlipssRequest) (*resp
 	passUpdTplRequest := &request.AlipayPassTplContentUpdateRequest{}
 
 	// client
-	c := &sdk.DefaultAlipayClient{
+	c := &alipay.DefaultAlipayClient{
 		AppId:     r.AppId,
 		ServerURL: r.AlipayApiUrl,
 		PrivKey:   r.PrivateKeyData,
