@@ -72,7 +72,9 @@ func genPrivKeyFromPKSC8(pkcs8Key string) (privkey *rsa.PrivateKey) {
 	}
 	// 使用pkcs8格式
 	pkcs8, err := x509.ParsePKCS8PrivateKey(encodedKey)
-
+	if err!=nil{
+		log.Fatal(err)
+	}
 	var ok bool
 	if privkey, ok = pkcs8.(*rsa.PrivateKey); !ok {
 		log.Fatal(ok)
@@ -90,14 +92,22 @@ func genPrivKeyFromPKSC8(pkcs8Key string) (privkey *rsa.PrivateKey) {
 // <sign_type>RSA</sign_type>
 // </alipay>
 func EncryptAndSignResponse(content, cusPrivKey string, isEncrypt, isSign bool) (string, error) {
-
-	builder := `<?xml version=1.0 encoding=GBK?>
+	builder:= `<?xml version="1.0" encoding="GBK"?>
 				<alipay>
 					<response>%s</response>
 					<encryption_type>RSA</encryption_type>
 					<sign>%s</sign>
 					<sign_type>RSA</sign_type>
 				</alipay>`
+	if !isEncrypt{
+		builder = `<?xml version="1.0" encoding="GBK"?>
+				<alipay>
+					<response>%s</response>
+					<sign>%s</sign>
+					<sign_type>RSA</sign_type>
+				</alipay>`
+	}
+
 
 	switch {
 	case isEncrypt == true:
