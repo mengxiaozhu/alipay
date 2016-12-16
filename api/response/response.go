@@ -8,7 +8,6 @@ import (
 
 // AlipayResponse response接口
 type AlipayResponse interface {
-
 	// 判断是否成功
 	IsSuccess() bool
 	// 接口名称
@@ -127,4 +126,58 @@ type AlipayPassTplContentUpdateResponse struct {
 	Result    string `json:"result"`
 	ErrorCode string `json:"error_code"`
 	Success   bool   `json:"success"`
+}
+type AlipayUserUserinfoShareResponse struct {
+	BaseResponse
+	Address               string `db:"address" json:"address"`
+	AddressCode           string `db:"address_code" json:"address_code"`
+	AlipayUserID          string `db:"alipay_user_id" json:"alipay_user_id"`
+	Area                  string `db:"area" json:"area"`
+	Avatar                string `db:"avatar" json:"avatar"`
+	BalanceFreezeType     string `db:"balance_freeze_type" json:"balance_freeze_type"`
+	Birthday              string `db:"birthday" json:"birthday"`
+	CertNo                string `db:"cert_no" json:"cert_no"`
+	CertTypeValue         string `db:"cert_type_value" json:"cert_type_value"`
+	City                  string `db:"city" json:"city"`
+	DefaultDeliverAddress string `db:"default_deliver_address" json:"default_deliver_address"`
+	DeliverAddressList    []struct {
+		Address               string `db:"address" json:"address"`
+		AddressCode           string `db:"address_code" json:"address_code"`
+		DefaultDeliverAddress string `db:"default_deliver_address" json:"default_deliver_address"`
+		DeliverArea           string `db:"deliver_area" json:"deliver_area"`
+		DeliverCity           string `db:"deliver_city" json:"deliver_city"`
+		DeliverFullname       string `db:"deliver_fullname" json:"deliver_fullname"`
+		DeliverMobile         string `db:"deliver_mobile" json:"deliver_mobile"`
+		DeliverPhone          string `db:"deliver_phone" json:"deliver_phone"`
+		DeliverProvince       string `db:"deliver_province" json:"deliver_province"`
+		Zip                   string `db:"zip" json:"zip"`
+	} `db:"deliver_address_list" json:"deliver_address_list"`
+	DeliverArea           string `db:"deliver_area" json:"deliver_area"`
+	DeliverCity           string `db:"deliver_city" json:"deliver_city"`
+	DeliverFullname       string `db:"deliver_fullname" json:"deliver_fullname"`
+	DeliverMobile         string `db:"deliver_mobile" json:"deliver_mobile"`
+	DeliverPhone          string `db:"deliver_phone" json:"deliver_phone"`
+	DeliverProvince       string `db:"deliver_province" json:"deliver_province"`
+	Email                 string `db:"email" json:"email"`
+	FamilyName            string `db:"family_name" json:"family_name"`
+	FirmName              string `db:"firm_name" json:"firm_name"`
+	Gender                string `db:"gender" json:"gender"`
+	IsBalanceFrozen       string `db:"is_balance_frozen" json:"is_balance_frozen"`
+	IsBankAuth            string `db:"is_bank_auth" json:"is_bank_auth"`
+	IsCertified           string `db:"is_certified" json:"is_certified"`
+	IsCertifyGradeA       string `db:"is_certify_grade_a" json:"is_certify_grade_a"`
+	IsIDAuth              string `db:"is_id_auth" json:"is_id_auth"`
+	IsLicenceAuth         string `db:"is_licence_auth" json:"is_licence_auth"`
+	IsMobileAuth          string `db:"is_mobile_auth" json:"is_mobile_auth"`
+	IsStudentCertified    string `db:"is_student_certified" json:"is_student_certified"`
+	Mobile                string `db:"mobile" json:"mobile"`
+	NickName              string `db:"nick_name" json:"nick_name"`
+	Phone                 string `db:"phone" json:"phone"`
+	Province              string `db:"province" json:"province"`
+	RealName              string `db:"real_name" json:"real_name"`
+	ReducedBirthday       string `db:"reduced_birthday" json:"reduced_birthday"`
+	UserID                string `db:"user_id" json:"user_id"`
+	UserStatus            string `db:"user_status" json:"user_status"`
+	UserTypeValue         string `db:"user_type_value" json:"user_type_value"`
+	Zip                   string `db:"zip" json:"zip"`
 }

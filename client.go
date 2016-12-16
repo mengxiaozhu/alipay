@@ -19,10 +19,10 @@ import (
 
 // default
 const (
-	format         = "json"
-	signType       = "RSA"
+	format = "json"
+	signType = "RSA"
 	connectTimeout = 3000
-	readTimeout    = 15000
+	readTimeout = 15000
 )
 
 // AlipayClient 客户端接口
@@ -101,6 +101,9 @@ func (d *DefaultAlipayClient) post(r request.AlipayRequest, token string) (strin
 	rp[constants.Timestamp] = time.Now().Format("2006-01-02 15:03:04")
 	rp[constants.Version] = r.GetApiVersion()
 	rp[constants.Charset] = d.Charset
+	if token != "" {
+		rp[constants.AuthToken] = token
+	}
 	utils.PutAll(rp, r.GetTextParams())
 	// 可选参数
 	// rp[constants.Format] = d.Format
@@ -126,7 +129,7 @@ func (d *DefaultAlipayClient) post(r request.AlipayRequest, token string) (strin
 			log.Printf("connect AlipayGateway fail: %s, retry ...", err)
 			retryCount += 1
 			// 务必休眠一段时间，否则下次可能还会失败
-			time.Sleep(time.Duration(retryCount*3) * time.Second)
+			time.Sleep(time.Duration(retryCount * 3) * time.Second)
 			continue
 		}
 		break

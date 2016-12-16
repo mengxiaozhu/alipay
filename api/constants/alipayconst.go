@@ -9,4 +9,5 @@ const (
 	Timestamp = "timestamp"
 	Version   = "version"
 	Charset   = "charset"
+	AuthToken     = "auth_token"
 )
