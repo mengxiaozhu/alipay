@@ -181,6 +181,25 @@ type AlipayUserUserinfoShareResponse struct {
 	UserTypeValue      string `db:"user_type_value" json:"user_type_value"`
 	Zip                string `db:"zip" json:"zip"`
 }
+type AlipayCommerceEducateStudentinfoShareResponse struct {
+	BaseResponse
+	StudentInfoShareResult struct {
+		UserID       string `db:"user_id" json:"user_id"`
+		BizType      string `db:"biz_type" json:"biz_type"`
+		StudentInfos []struct {
+			CityNo        string `db:"city_no" json:"city_no"`
+			CollegeNo     string `db:"college_no" json:"college_no"`
+			CollegeName   string `db:"college_name" json:"college_name"`
+			Degree        string `db:"degree" json:"degree"`
+			Departments   string `db:"departments" json:"departments"`
+			Major         string `db:"major" json:"major"`
+			ClassName     string `db:"class_name" json:"class_name"`
+			StudentID     string `db:"student_id" json:"student_id"`
+			GmtGraduation string `db:"gmt_graduation" json:"gmt_graduation"`
+			GmtEnrollment string `db:"gmt_enrollment" json:"gmt_enrollment"`
+		} `db:"student_infos" json:"student_infos"`
+	} `db:"student_info_share_result" json:"student_info_share_result"`
+}
 
 type AlipaySocialBaseMcommentStudentQueryResponse struct {
 	BaseResponse
