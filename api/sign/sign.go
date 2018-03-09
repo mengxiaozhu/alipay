@@ -9,6 +9,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"github.com/smartwalle/alipay/encoding"
 	"log"
 )
 
@@ -63,6 +64,22 @@ func RsaSign(content, cusPrivKey string) (string, error) {
 	}
 	return base64.StdEncoding.EncodeToString(signed), nil
 }
+func SignRsa(content string, privateKey []byte) (s string, err error) {
+	sig, err := encoding.SignPKCS1v15([]byte(content), privateKey, crypto.SHA1)
+	if err != nil {
+		return "", err
+	}
+	s = base64.StdEncoding.EncodeToString(sig)
+	return s, nil
+}
+func Rsa2Sign(content string, privateKey []byte) (s string, err error) {
+	sig, err := encoding.SignPKCS1v15([]byte(content), privateKey, crypto.SHA256)
+	if err != nil {
+		return "", err
+	}
+	s = base64.StdEncoding.EncodeToString(sig)
+	return s, nil
+}
 
 func genPrivKeyFromPKSC8(pkcs8Key string) (privkey *rsa.PrivateKey) {
 	// 解base64
@@ -72,7 +89,7 @@ func genPrivKeyFromPKSC8(pkcs8Key string) (privkey *rsa.PrivateKey) {
 	}
 	// 使用pkcs8格式
 	pkcs8, err := x509.ParsePKCS8PrivateKey(encodedKey)
-	if err!=nil{
+	if err != nil {
 		log.Fatal(err)
 	}
 	var ok bool
@@ -91,23 +108,22 @@ func genPrivKeyFromPKSC8(pkcs8Key string) (privkey *rsa.PrivateKey) {
 // <sign>sign</sign>
 // <sign_type>RSA</sign_type>
 // </alipay>
-func EncryptAndSignResponse(content, cusPrivKey string, isEncrypt, isSign bool) (string, error) {
-	builder:= `<?xml version="1.0" encoding="GBK"?>
+	func EncryptAndSignResponse(content, cusPrivKey string, isEncrypt, isSign bool) (string, error) {
+	builder := `<?xml version="1.0" encoding="GBK"?>
 				<alipay>
 					<response>%s</response>
 					<encryption_type>RSA</encryption_type>
 					<sign>%s</sign>
 					<sign_type>RSA</sign_type>
 				</alipay>`
-	if !isEncrypt{
-		builder = `<?xml version="1.0" encoding="GBK"?>
+	if !isEncrypt {
+	builder = `<?xml version="1.0" encoding="GBK"?>
 				<alipay>
 					<response>%s</response>
 					<sign>%s</sign>
 					<sign_type>RSA</sign_type>
 				</alipay>`
 	}
-
 
 	switch {
 	case isEncrypt == true:

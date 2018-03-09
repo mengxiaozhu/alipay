@@ -2,27 +2,27 @@ package alipay
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/huandu/xstrings"
-	"github.com/cocotyty/alipay/api/constants"
-	"github.com/cocotyty/alipay/api/logger"
-	"github.com/cocotyty/alipay/api/request"
-	"github.com/cocotyty/alipay/api/response"
-	"github.com/cocotyty/alipay/api/sign"
-	"github.com/cocotyty/alipay/api/utils"
+	"github.com/mengxiaozhu/alipay/api/constants"
+	"github.com/mengxiaozhu/alipay/api/logger"
+	"github.com/mengxiaozhu/alipay/api/request"
+	"github.com/mengxiaozhu/alipay/api/response"
+	"github.com/mengxiaozhu/alipay/api/sign"
+	"github.com/mengxiaozhu/alipay/api/utils"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 	"time"
-	"fmt"
-	"log"
 )
 
 // default
 const (
-	format = "json"
-	signType = "RSA"
+	format         = "json"
+	signType       = "RSA"
 	connectTimeout = 3000
-	readTimeout = 15000
+	readTimeout    = 15000
 )
 
 // AlipayClient 客户端接口
@@ -111,7 +111,13 @@ func (d *DefaultAlipayClient) post(r request.AlipayRequest, token string) (strin
 	// 请求报文
 	content := utils.PrepareContent(rp)
 	// 签名
-	signed, err := sign.RsaSign(content, d.PrivKey)
+	var signed string
+	var err error
+	if d.SignType == signType {
+		signed, err = sign.SignRsa(content, []byte(d.PrivKey))
+	} else {
+		signed, err = sign.Rsa2Sign(content, []byte(d.PrivKey))
+	}
 	rp[constants.Sign] = signed
 
 	// 编码查询参数
@@ -129,7 +135,7 @@ func (d *DefaultAlipayClient) post(r request.AlipayRequest, token string) (strin
 			log.Printf("connect AlipayGateway fail: %s, retry ...", err)
 			retryCount += 1
 			// 务必休眠一段时间，否则下次可能还会失败
-			time.Sleep(time.Duration(retryCount * 3) * time.Second)
+			time.Sleep(time.Duration(retryCount*3) * time.Second)
 			continue
 		}
 		break
