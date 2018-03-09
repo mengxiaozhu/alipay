@@ -83,11 +83,14 @@ type AlipayMobilePublicMessageCustomSendResponse struct {
 // refer AlipaySystemOauthTokenRequest
 type AlipaySystemOauthTokenResponse struct {
 	BaseResponse
-	AccessToken  string `json:"access_token"`
-	AlipayUserId string `json:"user_id"`
-	ExpiresIn    int64  `json:"expires_in"`
-	ReExpiresIn  int64  `json:"re_expires_in"`
-	RefreshToken string `json:"refresh_token"`
+	AlipaySystemOauthTokenResponse struct {
+		AccessToken  string `json:"access_token"`
+		AlipayUserId string `json:"user_id"`
+		ExpiresIn    int64  `json:"expires_in"`
+		ReExpiresIn  int64  `json:"re_expires_in"`
+		RefreshToken string `json:"refresh_token"`
+	} `json:"alipay_system_oauth_token_response"`
+	Sign string `json:"sign"`
 }
 
 // AlipayPassTplContentAddResponse
@@ -209,7 +212,7 @@ type AlipaySocialBaseMcommentStudentQueryResponse struct {
 	Degree         string `db:"degree" json:"degree"`
 	EnrollmentTime string `db:"enrollment_time" json:"enrollment_time"`
 	GraduationTime string `db:"graduation_time" json:"graduation_time"`
-	StatusEnum     int `db:"status_enum" json:"status_enum"`
+	StatusEnum     int    `db:"status_enum" json:"status_enum"`
 	ProvinceCode   string `db:"province_code" json:"province_code"`
 	ProvinceName   string `db:"province_name" json:"province_name"`
 }
