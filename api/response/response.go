@@ -27,8 +27,8 @@ type BaseResponse struct {
 	Msg     string      `json:"msg"`
 	SubCode string      `json:"sub_code"`
 	SubMsg  string      `json:"sub_msg"`
-	Name    string`json:"name"`
-	Body    string`json:"body"`
+	Name    string      `json:"name"`
+	Body    string      `json:"body"`
 }
 
 func (r *BaseResponse) IsSuccess() bool {
@@ -88,7 +88,7 @@ type AlipaySystemOauthTokenResponse struct {
 	ExpiresIn    int64  `json:"expires_in"`
 	ReExpiresIn  int64  `json:"re_expires_in"`
 	RefreshToken string `json:"refresh_token"`
-	Sign string `json:"sign"`
+	Sign         string `json:"sign"`
 }
 
 // AlipayPassTplContentAddResponse
