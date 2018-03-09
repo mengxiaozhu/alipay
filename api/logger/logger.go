@@ -2,7 +2,7 @@ package logger
 
 import (
 	"fmt"
-	"github.com/cocotyty/alipay/api/response"
+	"github.com/mengxiaozhu/alipay/api/response"
 	"runtime"
 	"time"
 )

@@ -1,8 +1,8 @@
 package request
 
 import (
-	"github.com/cocotyty/alipay/api/response"
-	"github.com/cocotyty/alipay/api/utils"
+	"github.com/mengxiaozhu/alipay/api/response"
+	"github.com/mengxiaozhu/alipay/api/utils"
 )
 
 // AlipayPassSyncUpdateRequest

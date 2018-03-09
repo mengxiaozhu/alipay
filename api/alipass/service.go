@@ -3,9 +3,9 @@ package alipass
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/cocotyty/alipay"
-	"github.com/cocotyty/alipay/api/request"
-	"github.com/cocotyty/alipay/api/response"
+	"github.com/mengxiaozhu/alipay"
+	"github.com/mengxiaozhu/alipay/api/request"
+	"github.com/mengxiaozhu/alipay/api/response"
 )
 
 // AlipassTransferService 卡券服务类

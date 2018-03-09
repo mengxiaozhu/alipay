@@ -1,6 +1,6 @@
 package request
 
-import "github.com/cocotyty/alipay/api/response"
+import "github.com/mengxiaozhu/alipay/api/response"
 
 type AlipayCommerceEducateStudentinfoShareRequest struct {
 

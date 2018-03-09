@@ -1,7 +1,7 @@
 package request
 
 import (
-	"github.com/cocotyty/alipay/api/response"
+	"github.com/mengxiaozhu/alipay/api/response"
 )
 
 // AlipayPassTplContentAddRequest
