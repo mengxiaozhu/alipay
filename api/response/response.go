@@ -83,13 +83,11 @@ type AlipayMobilePublicMessageCustomSendResponse struct {
 // refer AlipaySystemOauthTokenRequest
 type AlipaySystemOauthTokenResponse struct {
 	BaseResponse
-	AlipaySystemOauthTokenResponse struct {
-		AccessToken  string `json:"access_token"`
-		AlipayUserId string `json:"user_id"`
-		ExpiresIn    int64  `json:"expires_in"`
-		ReExpiresIn  int64  `json:"re_expires_in"`
-		RefreshToken string `json:"refresh_token"`
-	} `json:"alipay_system_oauth_token_response"`
+	AccessToken  string `json:"access_token"`
+	AlipayUserId string `json:"user_id"`
+	ExpiresIn    int64  `json:"expires_in"`
+	ReExpiresIn  int64  `json:"re_expires_in"`
+	RefreshToken string `json:"refresh_token"`
 	Sign string `json:"sign"`
 }
 
