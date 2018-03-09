@@ -97,7 +97,7 @@ func (d *DefaultAlipayClient) post(r request.AlipayRequest, token string) (strin
 	rp := make(map[string]string)
 	rp[constants.AppId] = d.AppId
 	rp[constants.Method] = r.GetApiMethod()
-	rp[constants.SignType] = signType // TODO
+	rp[constants.SignType] = d.SignType
 	rp[constants.Timestamp] = time.Now().Format("2006-01-02 15:03:04")
 	rp[constants.Version] = r.GetApiVersion()
 	rp[constants.Charset] = d.Charset
