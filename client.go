@@ -89,6 +89,7 @@ func (d *DefaultAlipayClient) ExecuteWithToken(r request.AlipayRequest, token st
 	if !resp.IsSuccess() {
 		logger.SecureError(rp, resp)
 	}
+	log.Println("resp",resp)
 	return resp, nil
 }
 
