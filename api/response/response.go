@@ -27,8 +27,8 @@ type BaseResponse struct {
 	Msg     string      `json:"msg"`
 	SubCode string      `json:"sub_code"`
 	SubMsg  string      `json:"sub_msg"`
-	Name    string
-	Body    string
+	Name    string`json:"name"`
+	Body    string`json:"body"`
 }
 
 func (r *BaseResponse) IsSuccess() bool {
